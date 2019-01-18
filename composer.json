@@ -1,0 +1,12 @@
+{
+	"require": {
+	    "nategood/commando": "*"
+	},
+	"autoload": {
+        "psr-4": {
+			"ProjectRoot\\" : "",
+        	"Tuzk\\App\\": "app/",
+            "Tuzk\\Core\\": "core/"
+    	}
+    }
+}
