@@ -5,6 +5,4 @@ require __DIR__.'/vendor/autoload.php';
 require __DIR__.'/core/bootstrap.php';
 
 // TODO: Write tests
-// add --list-themes
-// comment out target
 // testvar=$(php -r 'echo "hello1";')

@@ -60,11 +60,15 @@ if ($tuzk['new']) {
         );
     } elseif ($tuzk['generator']) {
         $newGenerator = (new Generator())->generate($tuzk['generator'], $tuzk['file']);
-        (new Parser())->replace('MODE', "hex", $newGenerator[1])
-                      ->replace('NAME', $tuzk['generator'], $newGenerator[1])
+        if ($tuzk['file']) {
+            $file = "target {$tuzk['file']}";
+        } else {
+            $file = "# target";
+        }
+        (new Parser())->replace('NAME', $tuzk['generator'], $newGenerator[1])
                       ->replace('NAME', $tuzk['generator'], $newGenerator[2])
                       ->replace('NAME', $tuzk['generator'], $newGenerator[3])
-                      ->replace('TARGET', $tuzk['file'], $newGenerator[1]);
+                      ->replace('TARGET', $file, $newGenerator[1]);
     }
 }
 
