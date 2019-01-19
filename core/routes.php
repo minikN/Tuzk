@@ -55,17 +55,11 @@ if ($tuzk['new']) {
         );
     } elseif ($tuzk['generator']) {
         $newGenerator = (new Generator())->generate($tuzk['generator'], $tuzk['file']);
-        (new Parser())->append(
-            $newGenerator[0],
-            "## GENERATOR FOR\t" . $tuzk['generator'] . PHP_EOL .
-            "## AUTHOR\t\t" . $_SERVER['USER'] . PHP_EOL .
-            "## CREATED\t\t" . date('d-m-Y') . PHP_EOL . PHP_EOL
-        )
-            ->replace('MODE', "hex", $newGenerator[1])
-            ->replace('NAME', $tuzk['generator'], $newGenerator[1])
-            ->replace('NAME', $tuzk['generator'], $newGenerator[2])
-            ->replace('NAME', $tuzk['generator'], $newGenerator[3])
-            ->replace('TARGET', $tuzk['file'], $newGenerator[1]);
+        (new Parser())->replace('MODE', "hex", $newGenerator[1])
+                      ->replace('NAME', $tuzk['generator'], $newGenerator[1])
+                      ->replace('NAME', $tuzk['generator'], $newGenerator[2])
+                      ->replace('NAME', $tuzk['generator'], $newGenerator[3])
+                      ->replace('TARGET', $tuzk['file'], $newGenerator[1]);
     }
 }
 
