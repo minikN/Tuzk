@@ -161,24 +161,24 @@ Tuzk comes with a couple of handy functions to read variables of the currently a
 
 With `-r/--read` you can read a specific variable and Tuzk will write it to stdout.
 
-    php tuzk -r bg
+    tuzk -r bg
     #2d2a2e
 
 With that you can also refer to variables of the currently applied theme in the bash scripts.
 
 With `--current` you can read the currently applied theme.
 
-    php tuzk --current
+    tuzk --current
     monokai
 
 With `--list-schemes`, `--list-themes` and `--list-generators` you can list all available schemes, themes and generators.
 
-    php tuzk --list-schemes
+    tuzk --list-schemes
     monokai
     gruvbox
     solarized
 
-    php tuzk --list-generators
+    tuzk --list-generators
     rofi
     vim
     sublime
