@@ -66,4 +66,24 @@ class Theme
             $parser->replace($var, $key, $target);
         }
     }
+
+    public static function list()
+    {
+        foreach (Generator::list(true) as $generator) {
+            $themes = array_diff(
+                scandir(App::get('config')['GENERATORS'] . "/$generator"),
+                [
+                    '..',
+                    '.',
+                    $generator . "_template",
+                    $generator . "_settings",
+                    $generator . "_post",
+                    $generator . "_pre"
+                ]
+            );
+            foreach ($themes as $theme) {
+                echo "$theme\n";
+            }
+        }
+    }
 }

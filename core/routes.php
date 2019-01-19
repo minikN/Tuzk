@@ -27,6 +27,11 @@ if ($tuzk['list-generators']) {
     die();
 }
 
+if ($tuzk['list-themes']) {
+    Theme::list();
+    die();
+}
+
 if ($tuzk['read']) {
     echo (new Parser())->read(App::get('config')['CURRENT'])->getVar($tuzk['read']) . PHP_EOL;
 }
