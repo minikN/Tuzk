@@ -1,26 +1,22 @@
 ## Colors
-bg           #222222
-bg2          #333333
+bg                  #000000
+grey                #000000
+grey-dark           #000000
+grey-bright         #000000
 
-fg           #DDDDDD
-comment      #AAAAAA
+fg                  #000000
+fg-dark             #000000
+fg-bright           #000000
+fg-white            #000000
 
-red          #FF0000
-green        #00FF00
-blue         #0000FF
-yellow       #FFFF00
-cyan         #00FFFF
-magenta      #FF00FF
+contrast            #000000
+contrast-dark       #000000
+contrast-darker     #000000
 
-dark         #000000
-light        #FFFFFF
-
-activebg     cyan
-activefg     light
-activehl     dark
-
-inactivebg   blue
-inactivefg   fg
-
-selectedbg   magenta
-selectedfg   light
+red                 #000000
+yellow              #000000
+green               #000000
+purple              #000000
+orange              #000000
+cyan                #000000
+accent              #000000
