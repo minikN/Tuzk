@@ -97,7 +97,7 @@ Now take a look at `~/.config/tuzk/generators/rofi`. Couple of new files here. T
 
 Open `~/.config/tuzk/generators/rofi/rofi_settings`. If you specified a source file with the `-f/--file` flag, the target variable will be set to that file. If you apply a theme later, Tuzk will copy the generated theme to that path (and override any existing file in the process). If you don't want this, simply comment the line out. The `mode` will be set to `hex` by default. Read the mode section to find out what it's about.
 
-Now open `~/.config/tuzk/generators/rofi/rofi_template`. If you specified a file, this will be a carbon copy of that file. If not, it will be a blank file with a couple of comments. Just be sure to remove all comments (lines starting with `#`) when you're done, because they may cause parse issue for the application you wrote the generator for after you apply the theme.
+Now open `~/.config/tuzk/generators/rofi/rofi_template`. If you specified a file, this will be a carbon copy of that file. If not, it will be a blank file. Be sure not to add any comments to this file. If you have specified a target, the file will be copied to its target destination. Unwanted comments may cause parsing issue with the target application.
 
 In this file you want to replace every value with a placeholder containing the name of the variable you want to replace it with surrounded by two `%` symbols. So in case of our rofi example, we want to replace the line
 `bg: #000000;` with `bg: %%bg%%;`. When creating a theme, Tuzk will read that placeholder and replace it with whatever you specified in your color scheme. After doing that to all lines our rofi theme file should look like this:
