@@ -1,12 +1,8 @@
 #! /usr/bin/env php
 <?php
 
-
 require __DIR__.'/vendor/autoload.php';
 require __DIR__.'/core/bootstrap.php';
 
-
-
-// TODO: add --mode for generator and read
 // TODO: Write tests
 // testvar=$(php -r 'echo "hello1";')

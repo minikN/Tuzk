@@ -2,6 +2,7 @@
 
 use Tuzk\Core\App;
 use Tuzk\App\Parser;
+use Tuzk\App\Theme;
 use Tuzk\App\Scheme;
 use Tuzk\App\Applier;
 use Tuzk\Core\Config;

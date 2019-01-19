@@ -64,10 +64,18 @@ class Applier
     public function apply($scheme)
     {
         $this->scheme = $scheme;
-        if (file_exists("$this->SCHEMES/current") && ! App::get('force')) {
+        if (file_exists("$this->SCHEMES/current") && ! App::get('force') && (new Parser())->read(App::get('config')['CURRENT'])->getVar('SCHEME_NAME') == $this->scheme) {
             echo "ERROR: Scheme $this->scheme is already applied.\n";
             die();
         }
+
+        foreach (Generator::list(true) as $generator) {
+            if (! file_exists("$this->GENERATORS/$generator/$this->scheme")) {
+                echo "ERROR: Theme for $this->scheme for $generator hasn't been generated yet. Generate it with -t/--theme.\n";
+                die();
+            }
+        }
+
         $this->setCurrent();
         $this->preApplyGlobal();
         foreach (Generator::list(true) as $generator) {
