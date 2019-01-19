@@ -156,6 +156,26 @@ The last step is to apply a theme.
 
 Tuzk will copy the current theme to `/home/user/.config/tuzk/schemes/current`. You don't need to worry about it, but Tuzk needs that file for other operations. In `~/.config/tuzk` there is a `global_pre` and `global_post` file. Both are bash script. The pre apply script will be run before the theme is applied to any application. The generator specific pre and post script are run before / after the theme is applied to each application. The global post apply script is run after everything else is done. If you specified any targets, Tuzk will let you know what it copied.
 
+### Color mode
+Tuzk has the ability to output colors in different formats. The standard format is hexadecimal. However, some applications require the colors in other modes. Take this snippet from a sublime theme file for example:
+
+    "selected_match_fg":
+    [
+        184,
+        196,
+        195
+    ],
+
+Hexadecimal color codes won't get you very far there. Therefore Tuzk can output your colors as rgb as well. You can specify how to output colors on a per generator basis. Simply open the settings file of a generator and change the `mode` variable from `hex` to `rgb`. After that, Whenever this generator creates a theme, you will have access to the r, g and b values of each color. Let's say you have specified a variable `white #FFFFFF` in your scheme file. In the generator template file you can then access it as RGB with `white_R`, `white_G`, `white_B`. Therefore, the snippet above would look like this in your template file:
+
+    "selected_match_fg":
+    [
+        %%white_R%%,
+        %%white_G%%,
+        %%white_B%%
+    ],
+
+Notice however, that adressing the variable with `%%white%%` in your generator template will result in an error. If you choose the RGB mode, you have to adress the variables like shown above.
 
 ### Read values and lists
 Tuzk comes with a couple of handy functions to read variables of the currently applied theme as well as some list functions
@@ -164,6 +184,17 @@ With `-r/--read` you can read a specific variable and Tuzk will write it to stdo
 
     tuzk -r bg
     #2d2a2e
+
+You can also read values in RGB format. specify which value (r, g, b) with the `--rgb` flag.
+
+    tuzk -r fg
+    #fcfcfa
+    tuzk -r fg --rgb r
+    252
+    tuzk -r fg --rgb g
+    252
+    tuzk -r fg --rgb b
+    250
 
 With that you can also refer to variables of the currently applied theme in the bash scripts.
 
@@ -179,29 +210,12 @@ With `--list-schemes`, `--list-themes` and `--list-generators` you can list all 
     gruvbox
     solarized
 
+    tuzk --list-themes
+    monokai
+    gruvbox
+
     tuzk --list-generators
     rofi
     vim
     sublime
     xresources
-
-### Color mode
-Tuzk has the ability to output colors in different format. The standard format is hexadecimal. However, some applications require the colors in other modes. Take this snippet from a sublime theme file for example:
-
-    "selected_match_fg":
-    [
-        184,
-        196,
-        195
-    ],
-
-Hexadecimal color codes won't get you far there. Therefore Tuzk can output your colors as rgb as well. You can specify how to output colors on a per generator basis. Simply open the settings file of a generator and change the `mode` variable from `hex` to `rgb`. After that, Whenever this generator creates a theme, you will have access to the r, g and b values of each color. Let's say you have specified a variable `white #FFFFFF` in your scheme file. In the generator template file you can then access it as RGB with `white_R`, `white_G`, `white_B`. Therefore, the snippet above would look like this in your template file:
-
-    "selected_match_fg":
-    [
-        %%white_R%%,
-        %%white_G%%,
-        %%white_B%%
-    ],
-
-Notice however, that adressing the variable with `%%white%%` in your generator template will result in an error. If you choose the RGB mode, you have to adress the variables like shown above.

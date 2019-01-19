@@ -32,8 +32,21 @@ if ($tuzk['list-themes']) {
     die();
 }
 
+if ($tuzk['read'] && $tuzk['rgb']) {
+    $color = (new Parser())->read(App::get('config')['CURRENT'], "rgb");
+    if ($tuzk['rgb'] === 'r') {
+        echo $color->getVar($tuzk['read'])[0] . PHP_EOL;
+    } elseif ($tuzk['rgb'] === 'g') {
+        echo $color->getVar($tuzk['read'])[1] . PHP_EOL;
+    } else {
+        echo $color->getVar($tuzk['read'])[2] . PHP_EOL;
+    }
+    die();
+}
+
 if ($tuzk['read']) {
     echo (new Parser())->read(App::get('config')['CURRENT'])->getVar($tuzk['read']) . PHP_EOL;
+    die();
 }
 
 if ($tuzk['current']) {

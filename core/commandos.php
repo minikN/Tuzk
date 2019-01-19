@@ -57,3 +57,6 @@ $tuzk->option('r')
 $tuzk->option('current')
      ->boolean()
      ->describedAs('Writes the name of the currently applied color scheme to stdout.');
+
+$tuzk->option('rgb')
+     ->describedAs('Specify to either read the read (r), green (g) or blue (b) value of a given color.');
