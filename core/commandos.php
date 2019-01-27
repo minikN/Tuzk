@@ -32,6 +32,7 @@ $tuzk->option('a')
 
 $tuzk->option('t')
      ->aka('theme')
+     ->boolean()
      ->describedAs('Generates themes from generators for a given color scheme.');
 
 $tuzk->option('force')
@@ -60,3 +61,7 @@ $tuzk->option('current')
 
 $tuzk->option('rgb')
      ->describedAs('Specify to either read the read (r), green (g) or blue (b) value of a given color.');
+
+$tuzk->option('only');
+$tuzk->option('except');
+$tuzk->option('for');

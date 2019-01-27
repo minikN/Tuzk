@@ -10,48 +10,90 @@ class Theme
     private $mode;
     private $current;
     private $variables;
-    private $GENERATORS;
-    private $SCHEMES;
+    private $GENERATORS_DIR;
+    private $SCHEMES_DIR;
+    private $schemes;
+    private $generators;
 
-    public function __construct()
+    public function __construct($schemes = null, $except = null, $only = null)
     {
         if (! Config::isInitialized()) {
             echo "ERROR: Configuration folder doesn't exist. Maybe run php tuzk --init?\n";
             die();
         }
-        $this->GENERATORS = App::get('config')['GENERATORS'];
-        $this->SCHEMES = App::get('config')['SCHEMES'];
+
+        if ($except && $only) {
+            echo "ERROR: You can not use both --expect and --only. Aborting.\n";
+            die();
+        }
+
+        $this->GENERATORS_DIR = App::get('config')['GENERATORS'];
+        $this->SCHEMES_DIR = App::get('config')['SCHEMES'];
+
+        $this->for($schemes);
+        $this->except($except);
+        $this->only($only);
+
+        return $this;
     }
 
-    public function generate($scheme)
+    public function except($generators)
     {
-        foreach (Generator::list(true) as $generator) {
-            $this->mode = Generator::getMode(
-                "$this->GENERATORS/$generator/$generator" . "_settings"
-            );
-            foreach (Scheme::list(true) as $scheme) {
+        if ($generators) {
+            $generators = explode(",", $generators);
+            $this->generators = array_diff(Generator::list(true), $generators);
+        }
+    }
+    public function only($generators)
+    {
+        if ($generators) {
+            $this->generators = explode(",", $generators);
+        }
+    }
+
+    private function for($schemes)
+    {
+        if ($schemes) {
+            $this->schemes = explode(",", $schemes);
+            if (array_diff($this->schemes, Scheme::list(true))) {
+                echo "A scheme you specified is not a defined color scheme. Aborting\n";
+                die();
+            }
+        } else {
+            $this->schemes = Scheme::list(true);
+        }
+    }
+
+    public function prepare()
+    {
+        if (! $this->generators) {
+            $this->generators = Generator::list(true);
+        }
+        foreach ($this->generators as $generator) {
+            $this->mode = Generator::getMode("$this->GENERATORS_DIR/$generator/$generator" . "_settings");
+            foreach ($this->schemes as $scheme) {
                 $this->current = $scheme;
                 $this->variables = array_merge(
-                    (new Parser)->read("$this->SCHEMES/default", $this->mode)->get(),
-                    (new Parser)->read("$this->SCHEMES/$this->current", $this->mode)->get()
-                );
-                $this->generateTheme($generator);
+                        (new Parser)->read("$this->SCHEMES_DIR/default", $this->mode)->get(),
+                        (new Parser)->read("$this->SCHEMES_DIR/$this->current", $this->mode)->get()
+                    );
+                $this->generate($generator);
             }
         }
     }
 
-    private function generateTheme($generator)
+    private function generate($generator)
     {
-        if (file_exists("$this->GENERATORS/$generator/$this->current") && ! App::get('force')) {
+        if (file_exists("$this->GENERATORS_DIR/$generator/$this->current") && ! App::get('force')) {
             echo "SKIP: Theme $this->current for $generator already exists.\n";
             return 0;
         }
 
         echo "INFO: Generating theme $this->current for $generator.\n";
-        copy("$this->GENERATORS/$generator/$generator" . "_template", "$this->GENERATORS/$generator/$this->current");
+        copy("$this->GENERATORS_DIR/$generator/$generator" . "_template", "$this->GENERATORS_DIR/$generator/$this->current");
 
         foreach ($this->variables as $var => $key) {
-            $this->replaceWithMode($var, $key, "$this->GENERATORS/$generator/$this->current");
+            $this->replaceWithMode($var, $key, "$this->GENERATORS_DIR/$generator/$this->current");
         }
     }
 

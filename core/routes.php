@@ -86,7 +86,7 @@ if ($tuzk['new']) {
 }
 
 if ($tuzk['theme']) {
-    (new Theme())->generate($tuzk['theme']);
+    (new Theme($tuzk['for'], $tuzk['except'], $tuzk['only']))->prepare();
     die();
 }
 

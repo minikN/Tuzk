@@ -69,16 +69,13 @@ class Applier
             die();
         }
 
-        foreach (Generator::list(true) as $generator) {
-            if (! file_exists("$this->GENERATORS/$generator/$this->scheme")) {
-                echo "ERROR: Theme for $this->scheme for $generator hasn't been generated yet. Generate it with -t/--theme.\n";
-                die();
-            }
-        }
-
         $this->setCurrent();
         $this->preApplyGlobal();
         foreach (Generator::list(true) as $generator) {
+            if (! file_exists("$this->GENERATORS/$generator/$this->scheme")) {
+                echo "Theme $this->scheme doesn't exist for $generator. Skipping...\n";
+                break;
+            }
             $this->preApply($generator);
             $target = (new Parser())->read("$this->GENERATORS/$generator/$generator" . "_settings")->getVar('target');
             if ($target) {
