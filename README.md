@@ -25,7 +25,7 @@ Coming soon.
 
 #### Accessing tuzk globally
 There are many ways to achieve this.
-* Using shell aliases: You could create a simple alias in your `.bashrc` or `.zshrc` file like so: `echo "alias tuzk=\"php ~/builds/Tuzk/tuzk\"" >> ~/.zshrc && source ~/.zshrc`. If you open a new terminal afterwards you should be able to write `tuzk --help` and see Tuzk's help menu. There are obviously many ways of doing this. Google is your friend.
+* Using PATH: First, make Tuzk executable buy `cd`ing into its directory and run `chmod +x tuzk`. After that you could add a simple line in your `.bashrc` or `.zshrc` file like so: `echo "export PATH=~/path/to/tuzk:$PATH >> ~/.zshrc && source ~/.zshrc`. If you open a new terminal afterwards you should be able to write `tuzk --help` and see Tuzk's help menu. There are obviously many ways of doing this. Google is your friend.
 * Using composer (coming soon): If you have installed Tuzk globally using composer you can add composers' `vendor/bin` directory to your PATH like so (assuming zsh): `echo "export PATH=~/.config/composer/vendor/bin:$PATH" >> ~/.zshrc && source ~/.zshrc`. After that you should be able to open a new terminal window and type `tuzk --help` to see the help menu.
 
 ### Schemes, themes and generators
