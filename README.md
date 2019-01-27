@@ -135,11 +135,20 @@ Notice the last two lines, don't forget to use variables defined in the `default
 ### Creating a theme
 You are now ready to create a theme. We want to create a theme based off the monokai scheme we created earlier.
 
-    tuzk -t monokai
-    INFO: Generating theme monokai for rofi.
+    tuzk -t
 
-Tuzk will loop through every generator and create the theme. In this case we only have rofi.
-Check the file `~/.config/tuzk/generators/rofi/monokai`. It replaced all the placeholders with the values from the scheme file.
+If you run Tuzk with just the `-t/--theme` flag (with no argument), it will loop through every color scheme and create a theme for every generator. However, you have a couple of options to limit what to genereate. First of, you can use the `--for` flag to limit the schemes you want to create themes for. It takes a single scheme name or a comma separated list.
+
+    tuzk -t --for monokai,gruvbox
+
+This would just generate themes for the monokai and gruvbox color schemes. Further more, you may specify what generators to use. You have two options here, you can either use the `--only` or the `--except` flag. They are pretty much self explanatory. `--only` takes a comma separated list of the generators Tuzk should use, `--except` takes a list of what generators not to use.
+
+    tuzk -t --except rofi,sublime
+    // Would create themes from all color schemes for every generator but rofi and sublime.
+
+    tuzk -t --for monokai --only polybar,xresources
+    // Would create schemes from only the monokai color theme and only for the polybar and xresources generator.
+
 
 ### Applying a theme
 The last step is to apply a theme.
