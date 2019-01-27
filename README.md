@@ -40,7 +40,7 @@ By default Tuzk doesn't come with any schemes, themes or generators. It wouldn't
 ##### Initialisation
 After you have access to the `tuzk` executable, there is one more thing you need to in order to get going. You need to initialize Tuzk.
 
-You can do so by running `tuzk --init`. This will create all the necessary folders and files inside `~/config/tuzk`.
+You can do so by running `tuzk --init`. This will create all the necessary folders and files inside `~/.config/tuzk`.
 
 ##### The help menu
 In case you are lost, you can always run `tuzk --help` to get a handy help menu.
