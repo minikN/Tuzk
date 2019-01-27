@@ -44,7 +44,6 @@ You can do so by running `tuzk --init`. This will create all the necessary folde
 
 ##### The help menu
 In case you are lost, you can always run `tuzk --help` to get a handy help menu.
-![Help menu](notes/help_menu.png)
 
 ##### the --force flag
 You can prepend pretty much every command with `--force`. This forces Tuzk to override any already created files. Use this with caution. For example, you could run `tuzk --init --force` to force a re-initialisation. This will override all configuration (color schemes, themes and generators) files you may have created before.
