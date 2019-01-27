@@ -10,11 +10,11 @@ $tuzk->option('init')
 
 $tuzk->option('g')
      ->aka('generator')
-     ->describedAs('Specify that a generator should be created/deleted. Optionally a source file can be used with -f/--file.');
+     ->describedAs('Use with -n/--new: Specify that a generator should be created/deleted. Optionally a source file can be used with -f/--file.');
 
 $tuzk->option('s')
      ->aka('scheme')
-     ->describedAs('Specify that a scheme should be created/deleted.');
+     ->describedAs('Use with -n/--new: Specify that a scheme should be created/deleted.');
 
 $tuzk->option('n')
      ->aka('new')
@@ -24,7 +24,7 @@ $tuzk->option('n')
 $tuzk->option('f')
      ->aka('file')
      ->expectsFile()
-     ->describedAs('Specify a source file for the generator.');
+     ->describedAs('Use with -g/--generator: Specify a source file for the generator.');
 
 $tuzk->option('a')
      ->aka('apply')
@@ -60,8 +60,11 @@ $tuzk->option('current')
      ->describedAs('Writes the name of the currently applied color scheme to stdout.');
 
 $tuzk->option('rgb')
-     ->describedAs('Specify to either read the read (r), green (g) or blue (b) value of a given color.');
+     ->describedAs('Use with -r/--read: Specify to either read the red (r), green (g) or blue (b) value of a given color.');
 
-$tuzk->option('only');
-$tuzk->option('except');
-$tuzk->option('for');
+$tuzk->option('only')
+      ->describedAs('Use with -t/--theme: Specify to only use specific generators. Expects a comma separated list (first,second,third). Not useable in conjunction with --except.');
+$tuzk->option('except')
+      ->describedAs('Use with -t/--theme: Specify to not use specific generators. Expects a comma separated list (first,second,third). Not useable in conjunction with --only.');
+$tuzk->option('for')
+      ->describedAs('Use with -t/--theme: Specify to only use specific color schemes. Expects a comma separated list (first,second,third).');
