@@ -131,9 +131,9 @@ In this file you want to replace every value with a placeholder containing the n
     }
 
 Notice the last two lines, don't forget to use variables defined in the `default` file if you have default values.
-
+ We want to create a theme based off the monokai scheme we created earlier.
 ### Creating a theme
-You are now ready to create a theme. We want to create a theme based off the monokai scheme we created earlier.
+You are now ready to create a theme.
 
     tuzk -t
 
@@ -148,7 +148,6 @@ This would just generate themes for the monokai and gruvbox color schemes. Furth
 
     tuzk -t --for monokai --only polybar,xresources
     // Would create schemes from only the monokai color theme and only for the polybar and xresources generator.
-
 
 ### Applying a theme
 The last step is to apply a theme.
