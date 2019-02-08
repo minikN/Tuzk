@@ -40,25 +40,29 @@ class Applier
     private function preApplyGlobal()
     {
         echo "INFO: Running global pre apply script.\n";
-        shell_exec("sh $this->GLOBAL_PRE");
+        $output = shell_exec("sh $this->GLOBAL_PRE");
+        echo $output;
     }
 
     private function postApplyGlobal()
     {
         echo "INFO: Running global post apply script.\n";
-        shell_exec("sh $this->GLOBAL_POST");
+        $output = shell_exec("sh $this->GLOBAL_POST");
+        echo $output;
     }
 
     private function preApply($generator)
     {
         echo "INFO: Running $generator pre apply script.\n";
-        shell_exec("sh $this->GENERATORS/$generator/$generator" . "_pre");
+        $output = shell_exec("sh $this->GENERATORS/$generator/$generator" . "_pre");
+        echo $output;
     }
 
     private function postApply($generator)
     {
         echo "INFO: Running $generator post apply script.\n";
-        shell_exec("sh $this->GENERATORS/$generator/$generator" . "_post");
+        $output = shell_exec("sh $this->GENERATORS/$generator/$generator" . "_post");
+        echo $output;
     }
 
     public function apply($scheme)
@@ -73,8 +77,8 @@ class Applier
         $this->preApplyGlobal();
         foreach (Generator::list(true) as $generator) {
             if (! file_exists("$this->GENERATORS/$generator/$this->scheme")) {
-                echo "Theme $this->scheme doesn't exist for $generator. Skipping...\n";
-                break;
+                echo "WARNING: Theme $this->scheme doesn't exist for $generator. Skipping...\n";
+                continue;
             }
             $this->preApply($generator);
             $target = (new Parser())->read("$this->GENERATORS/$generator/$generator" . "_settings")->getVar('target');
