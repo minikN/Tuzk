@@ -92,6 +92,7 @@ class Theme
         echo "INFO: Generating theme $this->current for $generator.\n";
         copy("$this->GENERATORS_DIR/$generator/$generator" . "_template", "$this->GENERATORS_DIR/$generator/$this->current");
 
+
         foreach ($this->variables as $var => $key) {
             $this->replaceWithMode($var, $key, "$this->GENERATORS_DIR/$generator/$this->current");
         }
@@ -100,7 +101,7 @@ class Theme
     private function replaceWithMode($var, $key, $target)
     {
         $parser = new Parser();
-        if ($this->mode === "rgb") {
+        if ($this->mode === "rgb" && is_array($key)) {
             $parser->replace($var . "_R", $key[0], $target);
             $parser->replace($var . "_G", $key[1], $target);
             $parser->replace($var . "_B", $key[2], $target);

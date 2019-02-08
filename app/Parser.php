@@ -34,13 +34,11 @@ class Parser
 
     private function format($color)
     {
-        if ($this->mode === "hex") {
-            return $color;
-        }
-
         if ($this->mode === "rgb" && ((strpos($color, "#") === 0) && (strlen($color) === 7))) {
             return rgbMode($color);
         }
+
+        return $color;
     }
 
     public function replace($search, $replace, $path)
