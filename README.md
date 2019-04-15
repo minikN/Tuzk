@@ -4,6 +4,7 @@ Tuzk is a CLI color scheme and theme generator, applier and manager written in P
 ## TODO
 - Adhere to Base16 standard
 - Preview color scheme in terminal
+- Expose colors as temporary env vars.
 - Experimental: Build API for extension?
 
 ### Inspiration
