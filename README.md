@@ -1,6 +1,11 @@
 ## Tuzk
 Tuzk is a CLI color scheme and theme generator, applier and manager written in PHP.
 
+## TODO
+- Adhere to Base16 standard
+- Preview color scheme in terminal
+- Experimental: Build API for extension?
+
 ### Inspiration
 I have taken great inspiration from budlabs' [mondo](https://github.com/budlabs/mondo). Tuzk is similarly built and organized. Mondo is written in BASH however. I have written Tuzk because mondo was lacking a couple of featrues I wanted to have. All credit however goes to budrich. Without his application, I probably would have never started developing Tuzk.
 
